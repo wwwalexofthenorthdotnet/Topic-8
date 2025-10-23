@@ -1,4 +1,5 @@
 ﻿using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Security.AccessControl;
 
 namespace Topic_8
@@ -7,20 +8,97 @@ namespace Topic_8
     {
         static void Main(string[] args)
         {
-            List<int> numbers = new List<int>(); // Creates an empty List
-            int randNum, listMax = 20;
-            Random generator = new Random();
-            for (int i = 0; i < listMax; i++)
-            {
-                randNum = generator.Next(40);
-                numbers.Add(randNum);
-            }
-            Console.WriteLine("The largest number is " + numbers.Max());
-            Console.WriteLine("The smallest number is " + numbers.Min());
-            Console.WriteLine("The sum is " + numbers.Sum());
-            Console.WriteLine("The Average is " + (numbers.Sum() / listMax));
+            //colours();
+            //Console.ReadLine();
 
-            Console.ReadLine(); // Keeps the program from ending
+            Numbers();
+            Console.ReadLine();
+        }
+
+
+        public static void colours()
+        {
+            int randColour;
+
+            Random generator = new Random();
+
+            List<string> colours = new List<string>();
+
+            Console.WriteLine("What are your top 5 favourite colours?");
+            for (int i = 0; i < 5; i++)
+            {
+                Console.Write((i + 1) + ". ");
+                colours.Add(Console.ReadLine());
+            }
+
+            for (int i = 0; i < 5; i++)
+            {
+                Console.Write(colours[i] + ", ");
+            }
+
+            Console.WriteLine();
+
+            randColour = generator.Next(5);
+
+            Console.WriteLine(colours[randColour]);
+        }
+
+        public static void Numbers()
+        {
+            int randMax = 0, randMin = 1, loopAmount, guessNum;
+
+            Random generator = new Random();
+
+            List<int> RandomNumbers = new List<int>();
+
+            Console.WriteLine("How many numbers do you need?");
+
+            while (!int.TryParse(Console.ReadLine(), out loopAmount))
+            {
+                Console.WriteLine("How many numbers do you need?");
+                int.TryParse(Console.ReadLine(), out loopAmount);
+            }
+
+            Console.WriteLine("Enter a minimum value.");
+
+            while (randMin > randMax)
+            {
+                while (!int.TryParse(Console.ReadLine(), out randMin))
+                {
+                    Console.WriteLine("Enter a minimum value.");
+                    int.TryParse(Console.ReadLine(), out randMin);
+                }
+
+                Console.WriteLine("Enter a maximum value.");
+
+                while (!int.TryParse(Console.ReadLine(), out randMax))
+                {
+                    Console.WriteLine("Enter a maximum value.");
+                    int.TryParse(Console.ReadLine(), out randMax);
+                }
+            }
+            for (int i = 0; i < loopAmount; i++)
+            {
+                RandomNumbers.Add(generator.Next(randMin, randMax));
+            }
+
+            for (int i = 0; i < loopAmount; i++) // Number 1.
+                Console.WriteLine(RandomNumbers[i] + ", ");
+
+            Console.WriteLine("Pick a number between " + randMin + " and " + randMax + ".");
+            int.TryParse(Console.ReadLine(), out guessNum);
+            
+            for (int i = 0; i < RandomNumbers.Count; i++)
+            {
+                if (RandomNumbers[i] == guessNum)
+                {
+                    Console.Write("Your number appears " + RandomNumbers[i] + " times.");
+                }
+
+            }
+
+
+
         }
     }
 }
