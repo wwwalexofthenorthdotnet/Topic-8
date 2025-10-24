@@ -45,7 +45,7 @@ namespace Topic_8
 
         public static void Numbers()
         {
-            int randMax = 0, randMin = 1, loopAmount, guessNum;
+            int randMax = 0, randMin = 1, loopAmount, guessNum, equalToGuess = 0;
 
             Random generator = new Random();
 
@@ -86,18 +86,17 @@ namespace Topic_8
                 Console.WriteLine(RandomNumbers[i] + ", ");
 
             Console.WriteLine("Pick a number between " + randMin + " and " + randMax + ".");
-            int.TryParse(Console.ReadLine(), out guessNum);
-            
+                Console.WriteLine("Pick a number between " + randMin + " and " + randMax + ".");
+                int.TryParse(Console.ReadLine(), out guessNum);
+
             for (int i = 0; i < RandomNumbers.Count; i++)
             {
                 if (RandomNumbers[i] == guessNum)
-                {
-                    Console.Write("Your number appears " + RandomNumbers[i] + " times.");
-                }
+                    equalToGuess = equalToGuess + 1;
 
             }
 
-
+            Console.WriteLine(RandomNumbers[i]);
 
         }
     }
